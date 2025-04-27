@@ -21,7 +21,6 @@ function tsp_hk(distance_matrix) {
 
 function recursive(distance_matrix, visited, start, testCost, count) {
     var cities = distance_matrix.length;
-    var addedCost = 0;
 
     if (cities == 2) {
         return distance_matrix[0][1];
@@ -35,9 +34,8 @@ function recursive(distance_matrix, visited, start, testCost, count) {
     for (var i = 0; i < cities; i++) {
         if (visited[i] == false) {
             visited[i] = true;
-            addedCost = testCost + distance_matrix[start][i];
-            count++;
-            var totalCost = recursive(distance_matrix, visited, i, testCost, count);  
+            var addedCost = testCost + distance_matrix[start][i];
+            var totalCost = recursive(distance_matrix, visited, i, testCost, (count++));  
             if (answer > totalCost) {
                 answer = totalCost;
             }
