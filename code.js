@@ -46,6 +46,21 @@ function recursive(distance_matrix, visited, city, testCost, count) {
 
 function tsp_hk(distance_matrix) {
     var n = distance_matrix.length;
+    
+    // Handle the edge case where all distances are zero (no travel cost)
+    var allZero = true;
+    for (var i = 0; i < n; i++) {
+        for (var j = 0; j < n; j++) {
+            if (distance_matrix[i][j] !== 0) {
+                allZero = false;
+                break;
+            }
+        }
+        if (!allZero) break;
+    }
+    
+    if (allZero) return 0; // If all distances are zero, return 0 (no travel cost)
+
     var memo = {}; // memoization table
     
     // Recursive function with memoization
@@ -90,4 +105,5 @@ function tsp_hk(distance_matrix) {
 
     return minTourCost;
 }
+
 
