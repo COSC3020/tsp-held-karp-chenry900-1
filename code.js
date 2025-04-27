@@ -1,6 +1,5 @@
 function tsp_hk(distance_matrix) {
     var visited = [];
-    var start = 0;
     var testCost = 0;
     var count = 1;
     var answer = Infinity;
@@ -10,7 +9,7 @@ function tsp_hk(distance_matrix) {
             visited[i] = false;
         }
         visited[startCity] = true;
-        testCost = recursive(distance_matrix, visited, start, 0, count);
+        testCost = recursive(distance_matrix, visited, startCity, 0, count);
         if (answer > testCost) {
             answer = testCost;
         }
@@ -19,7 +18,7 @@ function tsp_hk(distance_matrix) {
     return answer;
 }
 
-function recursive(distance_matrix, visited, start, testCost, count) {
+function recursive(distance_matrix, visited, city, testCost, count) {
     var cities = distance_matrix.length;
 
     if (count == cities) {
@@ -31,7 +30,7 @@ function recursive(distance_matrix, visited, start, testCost, count) {
     for (var i = 0; i < cities; i++) {
         if (visited[i] == false) {
             visited[i] = true;
-            var addedCost = testCost + distance_matrix[start][i];
+            var addedCost = testCost + distance_matrix[city][i];
             var totalCost = recursive(distance_matrix, visited, i, addedCost, (count +1));  
             if (answer > totalCost) {
                 answer = totalCost;
