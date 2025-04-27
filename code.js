@@ -5,7 +5,7 @@ function tsp_hk(distance_matrix) {
     var count = 1;
     var answer = Infinity;
 
-    for (var startCity = 0; startCity < distancematrix.length; startCity++) {
+    for (var startCity = 0; startCity < distance_matrix.length; startCity++) {
         for (var i = 0; i < distance_matrix.length; i++) {
             visited[i] = false;
         }
