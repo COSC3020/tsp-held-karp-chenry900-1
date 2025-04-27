@@ -3,6 +3,10 @@ function tsp_hk(distance_matrix) {
 
     var length = distance_matrix.length;
     var cache = {};
+
+    for (var i = 0; i < distance_matrix.length; i++) {
+        cities.push(i);
+    }
     
     function recursive(cities, start) {
         if (cities.length == 2) { return distance_matrix[cities[0]][cities[1]];}
@@ -13,27 +17,22 @@ function tsp_hk(distance_matrix) {
         }
 
         var answer = Infinity;
-        for (var i = 0; i < cities.length; i++) {
-            var checkCities = [...cities];
-            var city = checkCities[i];
-            checkCities.splice(i, 1);
+        var trimmed = [...cities];
+        trimmed.splice(trimmed.indexOf(start), 1);
+        for(var i = 0; i < trimmed.length; i++) {
+            var city = trimmed[i];
+            min = Math.min(min, 
+                heldKarp(trimmed, city) + distance_matrix[start][city]);
+        }
 
-            var cost = recursive(checkCities, city) + distance_matrix[start][city];
-
-            var answer = Math.min(answer, cost);
-
-            cache[key] = answer;
-            return cost;
+            cache[key][start] = answer;
+            return answer;
         }
 
         var cost = Infinity;
         var cities = [];
-        for (var i = 0; i < length; i++) {
-            cities.push(i);
-        }
-
-        for(var start = 0; start < cities.length; start++) {
-            cost = Math.min(cost, recursive(cities, cities[start]));
+        for (var i = 0; i < cities.length; i++) {
+            cost = Math.min(cost, recursive(cities, cities[i]));
         }
 
         return cost;
