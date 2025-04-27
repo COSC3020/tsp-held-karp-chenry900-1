@@ -1,7 +1,7 @@
 function tsp_hk(distance_matrix) {
     if(distance_matrix.length < 2) { return 0;}
 
-    var length = distance_matrix.length;
+    var cities = [];
     var cache = {};
 
     for (var i = 0; i < distance_matrix.length; i++) {
