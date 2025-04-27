@@ -65,7 +65,7 @@ function tsp_hk(distance_matrix) {
     
     // Recursive function with memoization
     function dp(mask, i) {
-        // Base case: If only one city is visited, return 0 cost
+        // Base case: If all cities in the mask have been visited
         if (mask === (1 << i)) {
             return distance_matrix[0][i];
         }
@@ -105,5 +105,3 @@ function tsp_hk(distance_matrix) {
 
     return minTourCost;
 }
-
-
