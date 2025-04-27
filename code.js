@@ -1,3 +1,4 @@
+/*
 function tsp_hk(distance_matrix) {
     var visited = [];
     var testCost = 0;
@@ -41,3 +42,52 @@ function recursive(distance_matrix, visited, city, testCost, count) {
 
     return answer;
 }
+*/
+
+function tsp_hk(distance_matrix) {
+    var n = distance_matrix.length;
+    var memo = {}; // memoization table
+    
+    // Recursive function with memoization
+    function dp(mask, i) {
+        // Base case: If only one city is visited, return 0 cost
+        if (mask === (1 << i)) {
+            return distance_matrix[0][i];
+        }
+        
+        // Check if result is already computed for this state
+        if (memo[mask] && memo[mask][i] !== undefined) {
+            return memo[mask][i];
+        }
+        
+        var minCost = Infinity;
+
+        // Try all previous cities `j` that are in the visited set `mask`
+        for (var j = 0; j < n; j++) {
+            // If city `j` is visited in the current set `mask`, skip it
+            if ((mask & (1 << j)) === 0 || j === i) {
+                continue;
+            }
+            
+            var cost = dp(mask ^ (1 << i), j) + distance_matrix[j][i]; // Cost from city `j` to city `i`
+            minCost = Math.min(minCost, cost);
+        }
+
+        // Store the result in the memoization table
+        if (!memo[mask]) memo[mask] = {};
+        memo[mask][i] = minCost;
+
+        return minCost;
+    }
+
+    var allVisitedMask = (1 << n) - 1; // All cities visited (all bits are 1)
+    var minTourCost = Infinity;
+
+    // Try all cities as the ending city and find the minimum cost
+    for (var i = 1; i < n; i++) {
+        minTourCost = Math.min(minTourCost, dp(allVisitedMask, i) + distance_matrix[i][0]);
+    }
+
+    return minTourCost;
+}
+
