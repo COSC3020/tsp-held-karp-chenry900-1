@@ -47,6 +47,9 @@ What is the worst-case asymptotic time complexity of your implementation? What
 is the worst-case asymptotic memory complexity? Add your answer, including your
 reasoning, to this markdown file.
 
+because we are using memorization in our implmentation we dont have to recalculate each possible path a second time as it stores the data in the cache. So we only have to check each possibility once. So for each subset you find the shortest path given every possible start. There will be 2^n subsets and n possible starting cities per subset. If we assume the worst case it would need to cycle through all n cities making the time complexity O(2^n * n^2).
 
+The memory complexity would be O(n * 2^n) because of the way that the results of each subset is stored. You have 2^n subsets stored for each starting city.
 
+I used aPannell064's code after many attempts to get the memorization right and asking copilot for help so I read their code and tried to implement it in my code and couldn't get it to work with any changes I made to try and make it better.
 I certify that I have listed all sources used to complete this exercise, including the use of any Large Language Models. All of the work is my own, except where stated otherwise. I am aware that plagiarism carries severe penalties and that if plagiarism is suspected, charges may be filed against me without prior notice.
