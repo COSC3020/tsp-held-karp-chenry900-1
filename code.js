@@ -55,7 +55,7 @@ function tsp_hk(distance_matrix) {
 
     // Helper function to recursively solve the problem with memoization
     function recursive(distance_matrix, visited, city, testCost, count) {
-        // If all cities have been visited, return the cost to complete the tour
+        // If all cities have been visited, return the cost
         if (count == n) {
             return testCost;
         }
