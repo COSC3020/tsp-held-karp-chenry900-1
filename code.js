@@ -35,7 +35,7 @@ function recursive(distance_matrix, visited, start, testCost, count) {
         if (visited[i] == false) {
             visited[i] = true;
             var addedCost = testCost + distance_matrix[start][i];
-            var totalCost = recursive(distance_matrix, visited, i, testCost, (count++));  
+            var totalCost = recursive(distance_matrix, visited, i, addedCost, (++count));  
             if (answer > totalCost) {
                 answer = totalCost;
             }
