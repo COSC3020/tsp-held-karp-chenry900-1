@@ -27,7 +27,7 @@ function recursion(distance_matrix, memorize, current, visitedMask) {
     for(var i = 0; i < distance_matrix.length; i++) {
         if ((visitedMask & (1 << i)) == 0) {//copilot
             var newVisitedMask = visitedMask | (1 << i);//copilot
-            var newCost = distance_matrix[current][i] + recursion(distance_matrix, memorize, i, visitedMask);
+            var newCost = distance_matrix[current][i] + recursion(distance_matrix, memorize, i, newVisitedMask);
             cost = Math.min(cost, newCost);
         }
     }
