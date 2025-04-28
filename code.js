@@ -1,5 +1,7 @@
-function tsp_hk(distance_matrix) {
-    if(distance_matrix.length < 2) {return 0;}
+function tsp_hk(distance_matrix){
+if(distance_matrix.length < 2) {
+    return 0;
+}
     var cache = [];
     var cities = [];
     for (var i = 0; i < distance_matrix.length; i++) {
@@ -14,7 +16,7 @@ function tsp_hk(distance_matrix) {
         var key = JSON.stringify(cities.sort());
         if(cache[key] === undefined) {cache[key] = [];}
         if(cache[key][start] !== undefined) {return cache[key][start];}
- 
+
         //Get minimum for held-karp of the rest of the graph
         var min = Infinity;
         var trimmed = [...cities];
