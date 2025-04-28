@@ -1,39 +1,37 @@
 function tsp_hk(distance_matrix){
-if(distance_matrix.length < 2) {
-    return 0;
+    var length = distance_matrix.length;
+    var memorize = Array(length).fill().map(() => Array(1 << length).fill(-1));//copilot
+    var answer = Infinity;
+    
+    
+    for (var o = 0; o < length; o++) {
+        var visitedMask = 1 << o;//copilot
+        var cost = recursion(distance_matrix, memorize, o, visitedMask);
+        answer = Math.min(answer, cost);
+    }
+    
+return answer;
 }
-    var cache = [];
-    var cities = [];
-    for (var i = 0; i < distance_matrix.length; i++) {
-        cities.push(i);
+
+function recursion(distance_matrix, memorize, current, visitedMask) {
+    if (visitedMask == (1 << distance_matrix.length) - 1) {//copilot
+        return 0;
     }
 
-    function heldKarp(cities, start) {
-        //if |cities| == 2: return length between those two cities
-        if(cities.length == 2) {return distance_matrix[cities[0]][cities[1]];}
+    if (memorize[current][visitedMask] != -1) {//copilot
+        return memorize[current][visitedMask];
+    }
 
-        //Check cache to see if this subset has been processed before
-        var key = JSON.stringify(cities.sort());
-        if(cache[key] === undefined) {cache[key] = [];}
-        if(cache[key][start] !== undefined) {return cache[key][start];}
+    var cost = Infinity;
 
-        //Get minimum for held-karp of the rest of the graph
-        var min = Infinity;
-        var trimmed = [...cities];
-        trimmed.splice(trimmed.indexOf(start), 1);
-        for(var i = 0; i < trimmed.length; i++) {
-            var city = trimmed[i];
-            min = Math.min(min, 
-                heldKarp(trimmed, city) + distance_matrix[start][city]);
+    for(var i = 0; i < distance_matrix.length; i++) {
+        if ((visitedMask & (1 << i)) == 0) {//copilot
+            var newVisitedMask = visitedMask | (1 << next);//copilot
+            var newCost = distance_matrix[current][i] + recursion(distance_matrix, memorize, i, visitedMask);
+            cost = Math.min(cost, newCost);
         }
-        cache[key][start] = min;
-        return min;
     }
 
-    //|V| different start positions at beginning
-    var min = Infinity;
-    for(var i = 0; i < cities.length; i++) {
-        min = Math.min(min, heldKarp(cities, cities[i]));
-    }
-    return min;
+    memorize[current][visitedMask] = cost; //copilot
+    return cost;
 }
