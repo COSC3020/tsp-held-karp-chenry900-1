@@ -3,12 +3,12 @@ I am writing this from scratch not using anything or looking at anyone elses wor
 */
 
 function tsp_hk(distance_matrix){
-    var length = distance_matrix;
+    var length = distance_matrix.length;
     var answer = Infinity;
     const memo = new Map();
 
     for (var i = 0; i < length; i++) {
-        const mask = 1 << start;
+        const mask = 1 << i;
         var cost = recursion(distance_matrix, i, memo, mask);
         answer = Math.min(answer, cost);
     }
@@ -36,7 +36,7 @@ function recursion(distance_matrix, currentCity, memo, mask) {
     //to return i just know how the recursion works to add the distances together and check against the cost to get the shortest path from the starting city
     for (var i = 0; i < distance_matrix.length; i++) {
          if ((mask & (1 << nextCity)) === 0) {//copilot
-            const newMask = mask | (1 << nextCity);//copilot
+            const newMask = mask | (1 << i);//copilot
             var testCost = distance_matrix[currentCity][i] + recursion(distance_matrix, i, memo, newMask);//copilot i did learn from this but i added this before using copilot to add the mask
             cost = Math.min(cost, testCost);
          }
@@ -50,20 +50,20 @@ function recursion(distance_matrix, currentCity, memo, mask) {
 this code is what was given to me when i asked it to add a bit mask to my code without changing what i wrote
 
 function tsp_hk(distance_matrix) {
-    const n = distance_matrix.length;
+    var length = distance_matrix.length;
+    var answer = Infinity;
     const memo = new Map();
-    let answer = Infinity;
 
-    for (let start = 0; start < n; start++) {
-        const mask = 1 << start;
-        const cost = recursion(distance_matrix, start, mask, memo);
+    for (var i = 0; i < length; i++) {
+        const mask = 1 << i; 
+        var cost = recursion(distance_matrix, i, memo, mask);
         answer = Math.min(answer, cost);
     }
 
     return answer;
 }
 
-function recursion(distance_matrix, currentCity, mask, memo) {
+function recursion(distance_matrix, currentCity, memo, mask) {
     const n = distance_matrix.length;
     const key = `${currentCity},${mask}`;
 
@@ -72,22 +72,22 @@ function recursion(distance_matrix, currentCity, mask, memo) {
     }
 
     if (mask === (1 << n) - 1) {
-        // All cities visited; no return to start needed
-        return 0;
+        return 0; // All cities visited
     }
 
-    let cost = Infinity;
+    var cost = Infinity;
 
-    for (let nextCity = 0; nextCity < n; nextCity++) {
-        if ((mask & (1 << nextCity)) === 0) {
+    for (var i = 0; i < n; nextCity++) {
+        if ((mask & (1 << i)) === 0) {
             const newMask = mask | (1 << nextCity);
-            const nextCost = distance_matrix[currentCity][nextCity] +
-                             recursion(distance_matrix, nextCity, newMask, memo);
-            cost = Math.min(cost, nextCost);
+            var testCost = distance_matrix[currentCity][nextCity] +
+                           recursion(distance_matrix, nextCity, memo, newMask);
+            cost = Math.min(cost, testCost);
         }
     }
 
     memo.set(key, cost);
     return cost;
 }
+
 */
