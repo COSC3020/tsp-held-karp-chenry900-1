@@ -22,6 +22,5 @@ function recursion(distance_matrix, currentCity, memo,) {
             cost = Math.min(cost, testCost);
          }
     }
-    memo.set(key, cost);//copilot
     return cost;
 }
