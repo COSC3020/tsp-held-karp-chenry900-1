@@ -51,5 +51,6 @@ because we are using memorization in our implmentation we dont have to recalcula
 
 The memory complexity would be O(n * 2^n) because of the way that the results of each subset is stored. You have 2^n subsets stored for each starting city.
 
-I used copilot to help change my brute force method I recreated to help me add the memorization lines that it helped with are marked on the code. I used nothing from the other student.
+I used https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/set as a reference to use map to make a string key it should function 
+almost the same as a bit mask key but I wrote all the code by myself.
 I certify that I have listed all sources used to complete this exercise, including the use of any Large Language Models. All of the work is my own, except where stated otherwise. I am aware that plagiarism carries severe penalties and that if plagiarism is suspected, charges may be filed against me without prior notice.
