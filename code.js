@@ -18,7 +18,7 @@ function recursion(distance_matrix, currentCity, memo,) {
 
 
     for (var i = 0; i < distance_matrix.length; i++) {
-            var testCost = distance_matrix[currentCity][i] + recursion(distance_matrix, i, memo,);//copilot i did learn from this but i added this before using copilot to add the mask
+            var testCost = distance_matrix[currentCity][i] + recursion(distance_matrix, i, memo,);
             cost = Math.min(cost, testCost);
          }
     }
