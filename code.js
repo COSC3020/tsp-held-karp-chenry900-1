@@ -27,8 +27,10 @@ function recursion(distance_matrix, currentCity, memo, visited) {
         if (visited[i]) {
             key += i + ",";
         }
+        if (i == currentCity) {
+            key += i + ",";
+        }
     }
-    key += currentCity + ",";
 
     if (memo.has(key)) {
         return memo.get(key);
