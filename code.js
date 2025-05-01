@@ -4,7 +4,7 @@ I am writing this from scratch not using anything or looking at anyone elses wor
 
 function tsp_hk(distance_matrix){
     var length = distance_matrix;
-    var answer = Ifinity;
+    var answer = Infinity;
     const memo = new Map();
 
     for (var i = 0; i < length; i++) {
