@@ -79,7 +79,7 @@ function recursion(distance_matrix, currentCity, memo, mask) {
 
     for (var i = 0; i < n; i++) {
         if ((mask & (1 << i)) === 0) {
-            const newMask = mask | (1 << nextCity);
+            const newMask = mask | (1 << i);
             var testCost = distance_matrix[currentCity][i] +
                            recursion(distance_matrix, i, memo, newMask);
             cost = Math.min(cost, testCost);
