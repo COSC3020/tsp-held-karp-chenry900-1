@@ -35,7 +35,7 @@ function recursion(distance_matrix, currentCity, memo, mask) {
     //this is as much as i know how to write as i dont know how to initalize the mask array so it works with the mask or the checks it uses
     //to return i just know how the recursion works to add the distances together and check against the cost to get the shortest path from the starting city
     for (var i = 0; i < distance_matrix.length; i++) {
-         if ((mask & (1 << nextCity)) === 0) {//copilot
+         if ((mask & (1 << i)) === 0) {//copilot
             const newMask = mask | (1 << i);//copilot
             var testCost = distance_matrix[currentCity][i] + recursion(distance_matrix, i, memo, newMask);//copilot i did learn from this but i added this before using copilot to add the mask
             cost = Math.min(cost, testCost);
@@ -77,11 +77,11 @@ function recursion(distance_matrix, currentCity, memo, mask) {
 
     var cost = Infinity;
 
-    for (var i = 0; i < n; nextCity++) {
+    for (var i = 0; i < n; i++) {
         if ((mask & (1 << i)) === 0) {
             const newMask = mask | (1 << nextCity);
-            var testCost = distance_matrix[currentCity][nextCity] +
-                           recursion(distance_matrix, nextCity, memo, newMask);
+            var testCost = distance_matrix[currentCity][i] +
+                           recursion(distance_matrix, i, memo, newMask);
             cost = Math.min(cost, testCost);
         }
     }
